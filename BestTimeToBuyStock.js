@@ -19,6 +19,30 @@
  * @param {number[]} prices
  * @return {number}
  */
-var maxProfit = function(prices) {
-    
+var maxProfit = function (prices) {
+    if (prices.length < 2) {
+        return 0; // If there are fewer than 2, no profit can be achieved.
+    }
+
+    let maxProfit = 0;
+    let minPrice = prices[0];
+
+    for (let i = 1; i < prices.length; i++) {
+        // Calculate the potential profit for the current day.
+        const potentialProfit = prices[i] - minPrice;
+
+        // Update the maxProfit if the potential profit is greater.
+        maxProfit = Math.max(maxProfit, potentialProfit);
+
+        // Update the minimum price encountered so far.
+        minPrice = Math.min(minPrice, prices[i]);
+    }
+
+    return maxProfit;
+};
+
+// Test cases
+console.log(maxProfit([7, 1, 5, 3, 6, 4])); // Output: 5
+console.log(maxProfit([7, 6, 4, 3, 1]));    // Output: 0
+
 };
